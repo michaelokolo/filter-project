@@ -14,7 +14,7 @@ export default function Home() {
         Here are some Automations that pre-defined for product availability
         monitoring
       </p>
-      <Search />
+      <Search items={items} />
       <div className="flex justify-center w-full">
         <div className=" flex flex-wrap gap-5 w-full">
           {items.map((item) => (
