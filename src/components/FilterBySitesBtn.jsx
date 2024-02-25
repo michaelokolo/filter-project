@@ -1,23 +1,31 @@
 import { Dropdown, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
-
 import { FaPlus } from 'react-icons/fa6';
 
-export default function FilterBySitesBtn({ items }) {
+export default function FilterBySitesBtn() {
   const [textInputValue, setTextInputValue] = useState('');
-  const [highlightedText, setHighlightedText] = useState('');
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
     setTextInputValue(value);
-    setHighlightedText(value);
   };
 
   const handleSelectItem = (title) => {
-    setTextInputValue(title);
+    setSelectedItems([...selectedItems, title]);
+    setTextInputValue('');
   };
   return (
-    <div>
+    <div className="flex gap-3">
+      {selectedItems ? (
+        <div className="flex gap-3 items-center">
+          {selectedItems.map((item, index) => (
+            <div key={index}>{item}</div>
+          ))}
+        </div>
+      ) : (
+        ''
+      )}
       <Dropdown
         arrowIcon={false}
         inline
@@ -40,55 +48,45 @@ export default function FilterBySitesBtn({ items }) {
         />
         <div className="max-h-64 sm:max-h-100   text-gray-500 bg-white w-full max-w-xl p-2 overflow-y-scroll scrollbar ">
           <div className="">
-            {[...new Set(items.map((item) => item.sites[0].title))].map(
-              (title, index, array) => (
-                <React.Fragment key={title}>
-                  <Dropdown.Item onClick={() => handleSelectItem(title)}>
-                    {title
-                      .toLowerCase()
-                      .includes(highlightedText.toLowerCase()) ? (
-                      <>
-                        <span>
-                          {title.substring(
-                            0,
-                            title
-                              .toLowerCase()
-                              .indexOf(highlightedText.toLowerCase())
-                          )}
-                        </span>
-                        <span style={{ backgroundColor: 'yellow' }}>
-                          {title.substring(
-                            title
-                              .toLowerCase()
-                              .indexOf(highlightedText.toLowerCase()),
-                            title
-                              .toLowerCase()
-                              .indexOf(highlightedText.toLowerCase()) +
-                              highlightedText.length
-                          )}
-                        </span>
-                        <span>
-                          {title.substring(
-                            title
-                              .toLowerCase()
-                              .indexOf(highlightedText.toLowerCase()) +
-                              highlightedText.length
-                          )}
-                        </span>
-                      </>
-                    ) : (
-                      <span>{title}</span>
-                    )}
-                  </Dropdown.Item>
-                  {index !== array.length - 1 && (
-                    <Dropdown.Divider
-                      className="mx-3"
-                      key={`divider-${index}`}
-                    />
-                  )}
-                </React.Fragment>
-              )
-            )}
+            <Dropdown.Item onClick={() => handleSelectItem('LinkedIn')}>
+              LinkedIn
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('ProductHunt')}>
+              ProductHunt
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Google')}>
+              Google
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Amazon')}>
+              Amazon
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Booking')}>
+              Booking
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('FDA')}>
+              FDA
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Google Maps')}>
+              Google Maps
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Pinterest')}>
+              Pinterest
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Trip Advisor')}>
+              Trip Advisor
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Twitter')}>
+              Twitter
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Upwork')}>
+              Upwork
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Craigslist')}>
+              Craigslist
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSelectItem('Meetup')}>
+              Meetup
+            </Dropdown.Item>
           </div>
         </div>
       </Dropdown>

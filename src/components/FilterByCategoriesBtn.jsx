@@ -2,7 +2,7 @@ import { Dropdown } from 'flowbite-react';
 import React from 'react';
 import { FaPlus } from 'react-icons/fa6';
 
-export default function FilterByCategoriesBtn({ items }) {
+export default function FilterByCategoriesBtn() {
   return (
     <div>
       <Dropdown

@@ -4,7 +4,7 @@ import { MdMonitor } from 'react-icons/md';
 import FilterBySitesBtn from './FilterBySitesBtn';
 import FilterByCategoriesBtn from './FilterByCategoriesBtn';
 
-export default function Search({ items }) {
+export default function Search() {
   const [extractData, setExtractData] = useState(false);
   const [monitoring, setMonitoring] = useState(false);
 
@@ -41,8 +41,8 @@ export default function Search({ items }) {
           <MdMonitor /> <span>Monitoring</span>
         </button>
 
-        <FilterBySitesBtn items={items} />
-        <FilterByCategoriesBtn items={items} />
+        <FilterBySitesBtn />
+        <FilterByCategoriesBtn />
       </form>
     </div>
   );
