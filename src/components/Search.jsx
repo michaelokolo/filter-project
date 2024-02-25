@@ -3,16 +3,21 @@ import { HiArrowsUpDown } from 'react-icons/hi2';
 import { MdMonitor } from 'react-icons/md';
 import FilterBySitesBtn from './FilterBySitesBtn';
 import FilterByCategoriesBtn from './FilterByCategoriesBtn';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  toggleExtractState,
+  toggleMonitorState,
+} from '../redux/filterSlice/filterSlice';
 
 export default function Search() {
-  const [extractData, setExtractData] = useState(false);
-  const [monitoring, setMonitoring] = useState(false);
+  const dispatch = useDispatch();
+  const { monitoring, extractData } = useSelector((state) => state.filters);
 
   const handleExtractData = () => {
-    setExtractData(!extractData);
+    dispatch(toggleExtractState());
   };
   const handleMonitoring = () => {
-    setMonitoring(!monitoring);
+    dispatch(toggleMonitorState());
   };
 
   return (

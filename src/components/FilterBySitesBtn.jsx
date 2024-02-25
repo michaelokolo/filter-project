@@ -1,10 +1,14 @@
 import { Dropdown, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa6';
+import { FaTimes } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFilter, removeFilter } from '../redux/filterSlice/filterSlice';
 
 export default function FilterBySitesBtn() {
+  const dispatch = useDispatch();
+  const { filters } = useSelector((state) => state.filters);
   const [textInputValue, setTextInputValue] = useState('');
-  const [selectedItems, setSelectedItems] = useState([]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -12,15 +16,30 @@ export default function FilterBySitesBtn() {
   };
 
   const handleSelectItem = (title) => {
-    setSelectedItems([...selectedItems, title]);
+    if (!filters.includes(title)) {
+      dispatch(addFilter(title));
+    }
     setTextInputValue('');
+  };
+
+  const handleRemoveFilter = (item) => {
+    dispatch(removeFilter(item));
   };
   return (
     <div className="flex gap-3">
-      {selectedItems ? (
+      {filters ? (
         <div className="flex gap-3 items-center">
-          {selectedItems.map((item, index) => (
-            <div key={index}>{item}</div>
+          {filters.map((item, index) => (
+            <button
+              className="text-purple-700 border mx-h-50 border-purple-700 rounded-full px-4 py-1 flex items-center gap-2"
+              type="button"
+              key={index}
+            >
+              <>
+                {item}
+                <FaTimes onClick={() => handleRemoveFilter(item)} />
+              </>
+            </button>
           ))}
         </div>
       ) : (
