@@ -1,7 +1,8 @@
 # Filter Project
 
-Git hub repository - https://github.com/michaelokolo/filter-project
-Test Environment - URL - https://filter-project.onrender.com
+- Git hub repository - https://github.com/michaelokolo/filter-project
+
+- Test Environment - URL - https://filter-project.onrender.com
 
 Instructions
 
