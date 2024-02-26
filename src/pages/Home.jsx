@@ -17,11 +17,42 @@ export default function Home() {
     const res = jsonData.data.oneClickAutomations.items;
     let filteredRes = res;
 
-    if (monitoring && extractData) {
+    if (monitoring && extractData && filters.length > 0) {
+      filteredRes = filteredRes.filter(
+        (item) =>
+          item.title.toLowerCase().includes('monitor') ||
+          item.title.toLowerCase().includes('extract') ||
+          filters.some((searchItem) =>
+            item.sites.some((site) =>
+              site.title.toLowerCase().includes(searchItem.toLowerCase())
+            )
+          )
+      );
+    } else if (monitoring && extractData) {
       filteredRes = filteredRes.filter(
         (item) =>
           item.title.toLowerCase().includes('monitor') ||
           item.title.toLowerCase().includes('extract')
+      );
+    } else if (monitoring && filters.length > 0) {
+      filteredRes = filteredRes.filter(
+        (item) =>
+          item.title.toLowerCase().includes('monitor') ||
+          filters.some((searchItem) =>
+            item.sites.some((site) =>
+              site.title.toLowerCase().includes(searchItem.toLowerCase())
+            )
+          )
+      );
+    } else if (extractData && filters.length > 0) {
+      filteredRes = filteredRes.filter(
+        (item) =>
+          item.title.toLowerCase().includes('extract') ||
+          filters.some((searchItem) =>
+            item.sites.some((site) =>
+              site.title.toLowerCase().includes(searchItem.toLowerCase())
+            )
+          )
       );
     } else if (monitoring) {
       filteredRes = filteredRes.filter((item) =>
@@ -31,10 +62,19 @@ export default function Home() {
       filteredRes = filteredRes.filter((item) =>
         item.title.toLowerCase().includes('extract')
       );
+    } else if (filters.length > 0) {
+      filteredRes = filteredRes.filter((item) =>
+        filters.some((searchItem) =>
+          item.sites.some((site) =>
+            site.title.toLowerCase().includes(searchItem.toLowerCase())
+          )
+        )
+      );
     }
+
     dispatch(updateData(filteredRes));
     console.log(filteredRes);
-  }, [monitoring, extractData]);
+  }, [monitoring, extractData, filters]);
 
   return (
     <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10 justify-center">
