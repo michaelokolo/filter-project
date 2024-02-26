@@ -22,10 +22,21 @@ export default function Home() {
         (item) =>
           item.title.toLowerCase().includes('monitor') ||
           item.title.toLowerCase().includes('extract') ||
-          filters.some((searchItem) =>
-            item.sites.some((site) =>
-              site.title.toLowerCase().includes(searchItem.toLowerCase())
-            )
+          filters.some(
+            (searchItem) =>
+              item.sites.some((site) =>
+                site.title.toLowerCase().includes(searchItem.toLowerCase())
+              ) ||
+              item.categories.some((category) =>
+                category.title.toLowerCase().includes(searchItem.toLowerCase())
+              ) ||
+              (item.categories.length === 2 &&
+                item.categories[0].title
+                  .toLowerCase()
+                  .includes(searchItem.toLowerCase()) &&
+                item.categories[1].title
+                  .toLowerCase()
+                  .includes(searchItem.toLowerCase()))
           )
       );
     } else if (monitoring && extractData) {
@@ -38,20 +49,42 @@ export default function Home() {
       filteredRes = filteredRes.filter(
         (item) =>
           item.title.toLowerCase().includes('monitor') ||
-          filters.some((searchItem) =>
-            item.sites.some((site) =>
-              site.title.toLowerCase().includes(searchItem.toLowerCase())
-            )
+          filters.some(
+            (searchItem) =>
+              item.sites.some((site) =>
+                site.title.toLowerCase().includes(searchItem.toLowerCase())
+              ) ||
+              item.categories.some((category) =>
+                category.title.toLowerCase().includes(searchItem.toLowerCase())
+              ) ||
+              (item.categories.length === 2 &&
+                item.categories[0].title
+                  .toLowerCase()
+                  .includes(searchItem.toLowerCase()) &&
+                item.categories[1].title
+                  .toLowerCase()
+                  .includes(searchItem.toLowerCase()))
           )
       );
     } else if (extractData && filters.length > 0) {
       filteredRes = filteredRes.filter(
         (item) =>
           item.title.toLowerCase().includes('extract') ||
-          filters.some((searchItem) =>
-            item.sites.some((site) =>
-              site.title.toLowerCase().includes(searchItem.toLowerCase())
-            )
+          filters.some(
+            (searchItem) =>
+              item.sites.some((site) =>
+                site.title.toLowerCase().includes(searchItem.toLowerCase())
+              ) ||
+              item.categories.some((category) =>
+                category.title.toLowerCase().includes(searchItem.toLowerCase())
+              ) ||
+              (item.categories.length === 2 &&
+                item.categories[0].title
+                  .toLowerCase()
+                  .includes(searchItem.toLowerCase()) &&
+                item.categories[1].title
+                  .toLowerCase()
+                  .includes(searchItem.toLowerCase()))
           )
       );
     } else if (monitoring) {
@@ -64,10 +97,21 @@ export default function Home() {
       );
     } else if (filters.length > 0) {
       filteredRes = filteredRes.filter((item) =>
-        filters.some((searchItem) =>
-          item.sites.some((site) =>
-            site.title.toLowerCase().includes(searchItem.toLowerCase())
-          )
+        filters.some(
+          (searchItem) =>
+            item.sites.some((site) =>
+              site.title.toLowerCase().includes(searchItem.toLowerCase())
+            ) ||
+            item.categories.some((category) =>
+              category.title.toLowerCase().includes(searchItem.toLowerCase())
+            ) ||
+            (item.categories.length === 2 &&
+              item.categories[0].title
+                .toLowerCase()
+                .includes(searchItem.toLowerCase()) &&
+              item.categories[1].title
+                .toLowerCase()
+                .includes(searchItem.toLowerCase()))
         )
       );
     }
