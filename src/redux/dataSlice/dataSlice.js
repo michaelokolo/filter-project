@@ -1,18 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import jsonData from '../data/automations.json';
-
-const { items } = jsonData.data.oneClickAutomations;
 
 const initialState = {
-  data: items,
+  data: [],
 };
-
 const dataSlice = createSlice({
   name: 'data',
   initialState,
-  reducers: {},
+  reducers: {
+    updateData: (state, action) => {
+      state.data = action.payload;
+    },
+  },
 });
 
-//remeber to come and export the actions
-
+export const { updateData } = dataSlice.actions;
 export default dataSlice.reducer;

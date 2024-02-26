@@ -12,7 +12,6 @@ export default function FilterByCategoriesBtn() {
     if (!filters.includes(title)) {
       dispatch(addFilter(title));
     }
-    setTextInputValue('');
   };
 
   return (
